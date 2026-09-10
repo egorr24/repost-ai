@@ -81,7 +81,12 @@ export function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps) {
       })
       if (error) throw error
     } catch (err: any) {
-      setError(err?.message || "Ошибка входа через Google")
+      const errMsg = err?.message || ""
+      if (errMsg.includes("provider is not enabled") || errMsg.includes("Unsupported provider") || errMsg.includes("validation_failed")) {
+        setError("Вход через Google ещё не активирован в панели Supabase. Войдите через Email ниже или включите Google Provider в Supabase Dashboard -> Auth -> Providers.")
+      } else {
+        setError(errMsg || "Ошибка входа через Google")
+      }
       setIsLoading(false)
     }
   }
