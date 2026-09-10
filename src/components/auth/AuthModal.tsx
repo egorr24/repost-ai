@@ -29,7 +29,7 @@ export function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps) {
 
     if (!isSupabaseConfigured) {
       setIsLoading(false)
-      setError("Supabase ещё не настроен. Добавьте ключи в .env.local")
+      setError("Supabase ещё не подключен. Проверьте переменные окружения на Vercel или выполните Redeploy.")
       return
     }
 
@@ -68,7 +68,7 @@ export function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps) {
 
     if (!isSupabaseConfigured) {
       setIsLoading(false)
-      setError("Supabase ещё не настроен. Добавьте ключи в .env.local")
+      setError("Supabase ещё не подключен. Проверьте переменные окружения на Vercel или выполните Redeploy.")
       return
     }
 
