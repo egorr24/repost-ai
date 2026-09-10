@@ -3,21 +3,21 @@ title RepostAI Server + Public Internet Tunnel
 cd /d "D:\projects\content-repurposer"
 
 echo ==============================================
-echo       Starting RepostAI (Next.js 14)
+echo       Starting RepostAI (Production)
 echo ==============================================
 echo.
 
-start "RepostAI Next.js Server" cmd /k "npm run dev"
-timeout /t 5 >nul
+start "RepostAI Server" cmd /k "npm run start"
+timeout /t 3 >nul
 
 echo Starting Public Internet Tunnel...
 start "RepostAI Public Tunnel" cmd /k "ssh -o StrictHostKeyChecking=no -R 80:localhost:3000 nokey@localhost.run"
 
 echo.
 echo ==============================================
-echo RepostAI is launching!
+echo RepostAI is running in production mode!
 echo Local URL: http://localhost:3000
-echo Check the 'RepostAI Public Tunnel' window for your public https URL
+echo Public URL is displayed in the Tunnel window.
 echo ==============================================
 echo.
 pause

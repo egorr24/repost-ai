@@ -5,21 +5,25 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 interface PricingCardProps {
   name: string
   price: string
+  period?: string
   description: string
   features: string[]
   isPopular?: boolean
   buttonText: string
   buttonVariant?: "default" | "secondary" | "outline"
+  onSelect?: () => void
 }
 
 export function PricingCard({
   name,
   price,
+  period,
   description,
   features,
   isPopular = false,
   buttonText,
   buttonVariant = "outline",
+  onSelect,
 }: PricingCardProps) {
   return (
     <Card className={`relative flex flex-col h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-violet-500/10 ${
@@ -28,16 +32,16 @@ export function PricingCard({
       {isPopular && (
         <div className="absolute -top-4 left-0 right-0 flex justify-center">
           <span className="bg-gradient-to-r from-amber-400 to-amber-600 text-neutral-950 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-            Best Deal
+            Хит продаж
           </span>
         </div>
       )}
       
       <CardHeader>
         <CardTitle className="text-xl">{name}</CardTitle>
-        <div className="mt-4 flex items-baseline text-5xl font-extrabold text-white">
+        <div className="mt-4 flex items-baseline text-4xl sm:text-5xl font-extrabold text-white">
           {price}
-          {price !== "$0" && price !== "$249" && <span className="ml-1 text-xl font-medium text-neutral-400">/мес</span>}
+          {period && <span className="ml-1 text-lg font-medium text-neutral-400">{period}</span>}
         </div>
         <CardDescription className="mt-2 text-neutral-400">{description}</CardDescription>
       </CardHeader>
@@ -60,6 +64,7 @@ export function PricingCard({
           variant={buttonVariant} 
           className="w-full"
           size="lg"
+          onClick={onSelect}
         >
           {buttonText}
         </Button>

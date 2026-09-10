@@ -9,9 +9,12 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Header } from "@/components/landing/Header"
 import { PricingCard } from "@/components/landing/PricingCard"
 import { FAQItem } from "@/components/landing/FAQItem"
+import { PaymentModal } from "@/components/landing/PaymentModal"
 
 export default function LandingPage() {
   const [activeTab, setActiveTab] = useState("linkedin")
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedPlan, setSelectedPlan] = useState({ name: "Lifetime", price: "3 990 ₽" })
 
   const previewContent: Record<string, string> = {
     linkedin: "Вчера я провел 10 часов за созданием контента.\nСегодня — 30 секунд. 🚀\n\nAI полностью меняет правила игры для креаторов. Вот 3 способа, как автоматизация спасла мой график:\n\n1️⃣ Репёрпозинг статей в посты\n2️⃣ Выделение главных инсайтов из подкастов\n3️⃣ Генерация каруселей по одному клику\n\nА сколько времени вы тратите на контент? 👇\n\n#AI #Productivity #ContentCreation #CreatorEconomy",
@@ -285,44 +288,55 @@ export default function LandingPage() {
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             <PricingCard
               name="Free"
-              price="$0"
-              description="Для тестирования и начинающих креаторов."
+              price="0 ₽"
+              description="Для тестирования и начинающих авторов."
               features={[
-                "3 генерации в месяц",
-                "Базовые платформы (X, Telegram)",
-                "Стандартное качество AI",
-                "Экспорт текста"
+                "3 бесплатные генерации",
+                "Все соцсети (Telegram, X, LinkedIn)",
+                "Форматирование с эмодзи",
+                "Копирование постов в 1 клик"
               ]}
-              buttonText="Начать бесплатно"
+              buttonText="Попробовать бесплатно"
+              onSelect={() => window.location.href = '/dashboard'}
             />
             <PricingCard
-              name="Pro"
-              price="$29"
-              description="Для регулярного создания контента."
+              name="Стандарт"
+              price="990 ₽"
+              period="/мес"
+              description="Для регулярного ведения каналов и блогов."
               features={[
-                "Безлимитные генерации",
-                "Все платформы (LinkedIn, Stories и др.)",
-                "Обучение AI вашему стилю",
-                "Приоритетная поддержка",
-                "Генерация каруселей"
+                "Безлимитные генерации постов",
+                "Все платформы + Stories и Reels",
+                "Выбор тональности и языка",
+                "Генерация ключевых инсайтов",
+                "Приоритетная скорость работы"
               ]}
-              buttonText="Попробовать Pro"
+              buttonText="Оформить за 990 ₽"
               buttonVariant="default"
+              onSelect={() => {
+                setSelectedPlan({ name: "Стандарт (1 месяц)", price: "990 ₽" })
+                setIsModalOpen(true)
+              }}
             />
             <PricingCard
               name="Lifetime"
-              price="$249"
-              description="Один платеж — доступ навсегда."
+              price="3 990 ₽"
+              period="разово"
+              description="Один платёж — вечный доступ без подписок."
               features={[
-                "Всё, что входит в план Pro",
-                "Никаких ежемесячных подписок",
-                "Доступ ко всем будущим фичам",
-                "Ранний доступ к бета-тестам",
-                "API доступ (скоро)"
+                "Всё из тарифа Стандарт навсегда",
+                "Никаких ежемесячных списаний",
+                "Доступ ко всем будущим обновлениям",
+                "Приоритетный доступ к новым моделям AI",
+                "Личная поддержка от создателя"
               ]}
               isPopular={true}
-              buttonText="Купить навсегда"
+              buttonText="Купить навсегда за 3 990 ₽"
               buttonVariant="secondary"
+              onSelect={() => {
+                setSelectedPlan({ name: "Lifetime (Вечный доступ)", price: "3 990 ₽" })
+                setIsModalOpen(true)
+              }}
             />
           </div>
         </div>
@@ -410,6 +424,13 @@ export default function LandingPage() {
           </div>
         </div>
       </footer>
+
+      <PaymentModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        planName={selectedPlan.name}
+        planPrice={selectedPlan.price}
+      />
     </div>
   )
 }
