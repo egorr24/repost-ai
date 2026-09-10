@@ -1,8 +1,10 @@
 "use client"
 
 import * as React from "react"
+import Link from "next/link"
 import { ContentInput } from "@/components/dashboard/ContentInput"
 import { ResultsPanel } from "@/components/dashboard/ResultsPanel"
+import { UserMenu } from "@/components/auth/UserMenu"
 import { RepurposeRequest, PlatformContent } from "@/types"
 
 export default function DashboardPage() {
@@ -46,16 +48,17 @@ export default function DashboardPage() {
     <div className="min-h-screen bg-[#0a0a0a] text-gray-200 selection:bg-purple-500/30">
       <header className="sticky top-0 z-10 border-b border-gray-800/60 bg-[#0a0a0a]/80 py-4 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
-          <div className="flex items-center space-x-2">
+          <Link href="/" className="flex items-center space-x-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-purple-600 font-bold text-white shadow-lg shadow-purple-600/20">
               R
             </div>
-            <span className="text-lg font-bold tracking-tight">RepostAI</span>
-          </div>
+            <span className="text-lg font-bold tracking-tight text-white">RepostAI</span>
+          </Link>
           <div className="flex items-center space-x-4">
-            <button className="text-sm font-medium text-gray-400 hover:text-white">История</button>
-            <div className="h-8 w-8 overflow-hidden rounded-full border border-gray-700 bg-gray-800">
-            </div>
+            <Link href="/#pricing" className="text-xs text-purple-400 hover:text-purple-300 font-medium">
+              Тарифы
+            </Link>
+            <UserMenu />
           </div>
         </div>
       </header>

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Sparkles, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { UserMenu } from "@/components/auth/UserMenu"
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -46,11 +47,9 @@ export function Header() {
         </nav>
 
         <div className="hidden md:flex items-center gap-4">
-          <Link href="/login" className="text-sm text-neutral-300 hover:text-white transition-colors">
-            Войти
-          </Link>
+          <UserMenu />
           <Button asChild size="sm">
-            <Link href="/dashboard">Начать бесплатно</Link>
+            <Link href="/dashboard">Дашборд</Link>
           </Button>
         </div>
 
